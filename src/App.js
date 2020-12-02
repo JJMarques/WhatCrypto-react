@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css';
 import Header from './components/Header'
 import SearchBar from './components/SearchBar'
+import Graph from './components/Graph'
 
 function App() {
 
@@ -20,10 +21,16 @@ function App() {
 
   }, [fetchUrl])
 
+  const changeUrl = (fd, ld) => {
+    setFetchUrl(`https://api.exchangerate.host/timeseries?start_date=${fd}&end_date=${ld}`)
+    console.log(`Url changed to ${fetchUrl}`)
+  }
+
   return (
     <>
       <Header />
-      <SearchBar />
+      <SearchBar changeUrl={changeUrl} />
+      <Graph />
     </>
   );
 }

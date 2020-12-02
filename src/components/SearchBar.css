@@ -8,6 +8,15 @@
     animation: Transition 0.6s ease-in-out;
 }
 
+#txt-description {
+    display: flex;
+    justify-content: center;
+    padding: 1.4em;
+    background-color: rgb(86, 240, 163);
+    font-size: 0.9em;
+    animation: Transition 0.6s ease-in-out;
+}
+
 #txt-finishing-date {
     margin-left: 40px;
 }
@@ -43,4 +52,5 @@
     background: rgb(243, 255, 246);
     color: rgb(8, 11, 34);
     font-weight: 800;
+    cursor: pointer;
 }
