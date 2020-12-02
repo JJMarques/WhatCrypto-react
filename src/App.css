@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+/******************************** ANIMATIONS *****************************/
+/******************************** ANIMATIONS *****************************/
+/******************************** ANIMATIONS *****************************/
+@keyframes Transition {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes NavAnimation {
+  0% {
+    height: 90px;
+  }
+  100% {
+    height: 100px;
+  }
+}
+/******************************** ANIMATIONS *****************************/
+/******************************** ANIMATIONS *****************************/
+/******************************** ANIMATIONS *****************************/
