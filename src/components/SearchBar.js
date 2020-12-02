@@ -6,16 +6,25 @@ function SearchBar({ changeUrl }) {
 
     const [firstDay, setFirstDay] = useState(new Date())
     const [lastDay, setLastDay] = useState(new Date())
+    const [alert, setAlert] = useState('')
 
     const changeDate = () => {
-        const firstDayString = `${firstDay.getFullYear()}-${firstDay.getMonth() + 1}-${firstDay.getDate()}`
-        const lastDayString = `${lastDay.getFullYear()}-${lastDay.getMonth() + 1}-${lastDay.getDate()}`
-        if (firstDayString !== lastDayString) {
-            changeUrl(firstDayString, lastDayString)
-            console.log(firstDayString, lastDayString);
+
+        if (firstDay === null || lastDay === null) {
+            setAlert('Please provide a date in both input fields.')
         } else {
-            console.log('Please provide different date values');
+            const firstDayString = `${firstDay.getFullYear()}-${firstDay.getMonth() + 1}-${firstDay.getDate()}`
+            const lastDayString = `${lastDay.getFullYear()}-${lastDay.getMonth() + 1}-${lastDay.getDate()}`
+
+            if (firstDayString !== lastDayString) {
+                changeUrl(firstDayString, lastDayString)
+                console.log(firstDayString, lastDayString);
+                setAlert('')
+            } else {
+                setAlert('Please provide different date values.')
+            }
         }
+
     }
 
     return (
@@ -47,6 +56,9 @@ function SearchBar({ changeUrl }) {
                     Get data
                 </button>
 
+            </div>
+            <div className="alert-mssg">
+                {alert.length > 0 ? alert : ''}
             </div>
         </>
     )
