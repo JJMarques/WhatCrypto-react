@@ -7,18 +7,27 @@ function Graph({ fetchedData }) {
     const [graphData, setGraphData] = useState([])
 
     useEffect(() => {
-        const manageFetchedData = () => {
+        if (fetchedData.rates) {
+            const manageFetchedData = () => {
 
-            let labelsArray = []
+                let labelsArray = []
+                let graphDataArray = []
 
-            console.log(fetchedData.rates)
-
-            Object.keys(fetchedData.rates).forEach(key => {
-                labelsArray.push(key)
-              });
-            setLabels(labelsArray)
+                Object.keys(fetchedData.rates).forEach(key => {
+                    labelsArray.push(key)
+                    graphDataArray.push(fetchedData.rates[key])
+                  });
+                setLabels(labelsArray)
+            
+                let data = []
+                graphDataArray.forEach((value, key) => {
+                    data.push(value.AED)
+                })
+                setGraphData(data)
+            }
+            manageFetchedData()
         }
-        manageFetchedData()
+        
     }, [fetchedData])
 
     const data = {
@@ -43,7 +52,7 @@ function Graph({ fetchedData }) {
                 pointHoverBorderWidth: 2,
                 pointRadius: 3,
                 pointHitRadius: 10,
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: graphData
             }
         ]
     };
