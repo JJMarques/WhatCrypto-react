@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
 
 function Graph({ fetchedData }) {
 
+    const [labels, setLabels] = useState([])
+    const [graphData, setGraphData] = useState([])
+
     useEffect(() => {
-        console.log(fetchedData);
+        const manageFetchedData = () => {
+
+            let labelsArray = []
+
+            console.log(fetchedData.rates)
+
+            Object.keys(fetchedData.rates).forEach(key => {
+                labelsArray.push(key)
+              });
+            setLabels(labelsArray)
+        }
+        manageFetchedData()
     }, [fetchedData])
 
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: labels,
         datasets: [
             {
                 label: '',
@@ -37,7 +51,7 @@ function Graph({ fetchedData }) {
     return (
         <div style={{display: 'flex', justifyContent: 'center', marginTop: '2em'}}>
             <div style={{ position: 'relative', width: '1200px' }}>
-                {fetchedData ? <Line data={data} /> : <></>}
+                {fetchedData.rates ? <Line data={data} /> : <></>}
             </div>
         </div>
     )
