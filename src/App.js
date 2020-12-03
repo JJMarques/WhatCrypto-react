@@ -12,27 +12,29 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const fetchCoins = async () => {
-      const result = await axios(fetchUrl)
-      setData(result.data)
-      setIsLoading(false)
+    if (fetchUrl.length > 0) {
+      const fetchCoins = async () => {
+        const result = await axios(fetchUrl)
+        setData(result.data)
+        setIsLoading(false)
+      }
+      fetchCoins()
     }
-    fetchCoins()
 
   }, [fetchUrl])
 
   const changeUrl = (fd, ld) => {
     setFetchUrl(`https://api.exchangerate.host/timeseries?start_date=${fd}&end_date=${ld}`)
-    console.log(`Url changed to ${fetchUrl}`)
   }
 
-  return (
-    <>
-      <Header />
-      <SearchBar changeUrl={changeUrl} />
-      <Graph />
-    </>
-  );
+return (
+  <>
+    <Header />
+    <SearchBar changeUrl={changeUrl} />
+    <Graph fetchedData={data} />
+  </>
+);
+
 }
 
 export default App;

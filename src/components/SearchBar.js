@@ -18,7 +18,6 @@ function SearchBar({ changeUrl }) {
 
             if (firstDayString !== lastDayString) {
                 changeUrl(firstDayString, lastDayString)
-                console.log(firstDayString, lastDayString);
                 setAlert('')
             } else {
                 setAlert('Please provide different date values.')
@@ -54,7 +53,7 @@ function SearchBar({ changeUrl }) {
                     onClick={changeDate}
                 >
                     Get data
-                </button>
+            </button>
 
             </div>
             <div className="alert-mssg">

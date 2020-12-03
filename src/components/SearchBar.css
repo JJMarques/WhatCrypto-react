@@ -16,6 +16,7 @@
     background-color: rgb(86, 240, 163);
     font-size: 0.9em;
     animation: Transition 0.6s ease-in-out;
+    color: rgb(8, 11, 34);
 }
 
 #txt-finishing-date {
@@ -24,7 +25,7 @@
 
 .search-container h5 {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
     margin-right: 20px;
 }
 

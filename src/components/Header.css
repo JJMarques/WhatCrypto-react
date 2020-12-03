@@ -1,6 +1,6 @@
 .header {
   height: 100px;
-  width: 100vw;
+  width: 100%;
   background: rgb(8, 11, 34);
   padding: 2em;
   display: flex;
