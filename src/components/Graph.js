@@ -5,22 +5,34 @@ function Graph({ fetchedData }) {
 
     const [labels, setLabels] = useState([])
     const [graphData, setGraphData] = useState([])
+    const [resultsArray, setResultsArray] = ([])
+    const [coinList, setCoinList] = useState([])
+    const [currentCoin, setCurrentCoin] = useState("")
 
+    //Whenever the data is fetched / dates are fetched
     useEffect(() => {
         if (fetchedData.rates) {
             const manageFetchedData = () => {
 
                 let labelsArray = []
                 let graphDataArray = []
+                let coinSelect = []
 
-                Object.keys(fetchedData.rates).forEach(key => {
-                    labelsArray.push(key)
-                    graphDataArray.push(fetchedData.rates[key])
+                Object.keys(fetchedData.rates).forEach(value => {
+                    //Get the labels of the dates to display on the graph
+                    labelsArray.push(value)
+                    graphDataArray.push(fetchedData.rates[value])
                   });
                 setLabels(labelsArray)
+
+                //Get selectable coins for the coin selector input
+                Object.keys(graphDataArray[0]).forEach(value => {
+                    coinSelect.push(value)
+                })
+                setCoinList(coinSelect)
             
                 let data = []
-                graphDataArray.forEach((value, key) => {
+                graphDataArray.forEach((value) => {
                     data.push(value.AED)
                 })
                 setGraphData(data)
@@ -30,12 +42,23 @@ function Graph({ fetchedData }) {
         
     }, [fetchedData])
 
-    const data = {
+    //Map trough the coin values and display it on the input select
+    const inputSelectCoin = coinList.map((value) => {
+        return(<option value={value} key={value}>{value}</option>)
+    })
+
+    //OnChange function for the coin select
+    const changeCoin = (e) => {
+        setCurrentCoin(e.target.value)
+    }
+
+    //Graphic display options
+    const graphOptions = {
         labels: labels,
         datasets: [
             {
                 label: '',
-                fill: false,
+                fill: true,
                 lineTension: 0.3,
                 backgroundColor: 'rgba(75,192,192,0.4)',
                 borderColor: '#56F0A3',
@@ -58,9 +81,15 @@ function Graph({ fetchedData }) {
     };
 
     return (
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '2em'}}>
+        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', background: '#F1F1F1', padding: '4em', minHeight: '600px'}}>
+            {fetchedData.rates ?
+                <select style={{padding: '0.5em 1.5em', borderRadius: '10px', marginBottom: '2em'}} onChange={changeCoin}>
+                    {inputSelectCoin}
+                </select> :
+                <></>
+            }
             <div style={{ position: 'relative', width: '1200px' }}>
-                {fetchedData.rates ? <Line data={data} /> : <></>}
+                {fetchedData.rates ? <Line data={graphOptions} /> : <></>}
             </div>
         </div>
     )
