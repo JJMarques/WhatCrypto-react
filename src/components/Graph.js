@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Line } from 'react-chartjs-2';
+import { Line, defaults } from 'react-chartjs-2';
 
 function Graph({ fetchedData }) {
+
+    defaults.global.defaultFontColor = '#080B22'
+    defaults.global.defaultFontStyle = '800'
+    defaults.global.defaultFontSize = 15
+    defaults.global.defaultFontFamily = 'Nunito'
 
     const [labels, setLabels] = useState([])
     const [graphData, setGraphData] = useState([])

@@ -29,7 +29,7 @@ function SearchBar({ changeUrl }) {
     return (
         <>
             <div id="txt-description">
-                <h1>Crypto exchange rates</h1>
+                <h1>Coin exchange rates</h1>
             </div>
             <div className="search-container">
 
