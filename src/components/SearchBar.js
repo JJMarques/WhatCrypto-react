@@ -6,7 +6,11 @@ function SearchBar({ changeUrl }) {
 
     const [firstDay, setFirstDay] = useState(new Date())
     const [lastDay, setLastDay] = useState(new Date())
+    //date submission validation alert
     const [alert, setAlert] = useState('')
+    //Date limits
+    const today = new Date()
+    const days = 86400000
 
     const changeDate = () => {
 
@@ -35,13 +39,15 @@ function SearchBar({ changeUrl }) {
 
                 <h5>Starting Date</h5>
                 <DatePicker
+                    minDate={new Date(today - (110*days))}
                     maxDate={new Date()}
                     onChange={setFirstDay}
                     value={firstDay}
-                />
+                    />
 
                 <h5 id="txt-finishing-date">Finishing Date</h5>
                 <DatePicker
+                    minDate={new Date(today - (110*days))}
                     maxDate={new Date()}
                     calendarClassName="custom-calendar"
                     onChange={setLastDay}

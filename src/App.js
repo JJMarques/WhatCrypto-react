@@ -9,14 +9,12 @@ function App() {
 
   const [fetchUrl, setFetchUrl] = useState('')
   const [data, setData] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (fetchUrl.length > 0) {
       const fetchCoins = async () => {
         const result = await axios(fetchUrl)
         setData(result.data)
-        setIsLoading(false)
       }
       fetchCoins()
     }
