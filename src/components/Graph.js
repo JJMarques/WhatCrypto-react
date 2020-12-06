@@ -10,9 +10,8 @@ function Graph({ fetchedData }) {
 
     const [labels, setLabels] = useState([])
     const [graphData, setGraphData] = useState([])
-    const [resultsArray, setResultsArray] = ([])
     const [coinList, setCoinList] = useState([])
-    const [currentCoin, setCurrentCoin] = useState("")
+    const [currentCoin, setCurrentCoin] = useState("AED")
 
     //Whenever the data is fetched / dates are fetched
     useEffect(() => {
@@ -38,14 +37,14 @@ function Graph({ fetchedData }) {
             
                 let data = []
                 graphDataArray.forEach((value) => {
-                    data.push(value.AED)
+                    data.push(value[currentCoin])
                 })
                 setGraphData(data)
             }
             manageFetchedData()
         }
         
-    }, [fetchedData])
+    }, [fetchedData, currentCoin])
 
     //Map trough the coin values and display it on the input select
     const inputSelectCoin = coinList.map((value) => {
@@ -82,7 +81,11 @@ function Graph({ fetchedData }) {
                 pointHitRadius: 10,
                 data: graphData
             }
-        ]
+        ],
+        options: {
+            //  responsive: true,
+             maintainAspectRatio : false
+        }
     };
 
     return (
@@ -94,7 +97,7 @@ function Graph({ fetchedData }) {
                 <></>
             }
             <div style={{ position: 'relative', width: '1200px' }}>
-                {fetchedData.rates ? <Line data={graphOptions} /> : <></>}
+                {fetchedData.rates ? <Line data={graphOptions} style={{height: '100%'}} /> : <></>}
             </div>
         </div>
     )
